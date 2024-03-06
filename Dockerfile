@@ -1,11 +1,14 @@
-FROM elixir:1.14-slim
+FROM elixir:1.16-slim
 
 RUN mkdir /app; mix local.hex --force
 
 COPY setup.sh /
 COPY startup.sh /
 
-RUN apt-get update && apt-get install -y iproute2 git && apt-get clean
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends iproute2 git &&\
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mix local.rebar --force
 RUN mix local.hex
