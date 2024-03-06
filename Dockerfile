@@ -1,4 +1,4 @@
-FROM elixir:1.14-alpine
+FROM elixir:1.14
 
 RUN mkdir /app; mix local.hex --force
 
